@@ -32,19 +32,34 @@ void showInOrder(NODE *auxiliar){
   }
 }
 
+//consult value in tree.
+int consultValue(NODE *auxiliar, int value, int find){
+  if(auxiliar != NULL && find == 0){
+    if(auxiliar->value == value){
+      find = 1;
+    } else if (value < auxiliar->value){
+      find = consultValue(auxiliar->left, value, find);
+    } else if (value > auxiliar->value){
+      find = consultValue(auxiliar->right, value, find);
+    }
+  }
+  return find;
+}
+
 int main(){
 
     NODE *root = NULL;
     NODE *auxiliar;
-    int operation, value;
+    int operation, value, find;
 
     do {
       cout << "\n Options for operation" << '\n';
       cout << "\n 1 - Insert value in tree" << '\n';
       cout << "\n 2 - Select all tree in order" << '\n';
+      cout << "\n 3 - Consult value in tree" << '\n';
 
       cin >> operation;
-      if (operation < 1 || operation > 2) {
+      if (operation < 1 || operation > 4) {
         cout << "Invalid option!" << '\n';
       } else if (operation == 1) {
         cout << "Insert a value: ";
@@ -58,7 +73,21 @@ int main(){
           cout << "elements in order in tree: " << '\n';
           showInOrder(root);
         }
+      } else if (operation == 3) {
+          if(root == NULL){
+            cout << "The Tree is null!" << '\n';
+          } else {
+            cout << "Insert the value of consult: ";
+            cin >> value;
+            find = 0;
+            find = consultValue(root, value, find);
+            if (find == 0){
+                cout << "Value not exist in Tree" << '\n';
+            } else{
+              cout << "Value found" << '\n';
+            }
+          }
       }
-    } while(operation!=3);
+    } while(operation!=4);
     return 0;
 }

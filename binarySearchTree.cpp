@@ -46,6 +46,22 @@ int consultValue(NODE *auxiliar, int value, int find){
   return find;
 }
 
+//Calculate the height of Tree
+int height(NODE *auxiliar){
+  if(auxiliar == NULL){
+      return -1;
+  } else if (auxiliar != NULL) {
+      int heightLeft = height(auxiliar->left);
+      int heightRight = height(auxiliar->right);
+      if(heightLeft > heightRight){
+          return heightLeft + 1;
+      } else {
+          return heightRight + 1;
+      }
+  }
+  return 0;
+}
+
 int main(){
 
     NODE *root = NULL;
@@ -57,9 +73,10 @@ int main(){
       cout << "\n 1 - Insert value in tree" << '\n';
       cout << "\n 2 - Select all tree in order" << '\n';
       cout << "\n 3 - Consult value in tree" << '\n';
+      cout << "\n 4 - Calculate height of three" << '\n';
 
       cin >> operation;
-      if (operation < 1 || operation > 4) {
+      if (operation < 1 || operation > 5) {
         cout << "Invalid option!" << '\n';
       } else if (operation == 1) {
         cout << "Insert a value: ";
@@ -87,7 +104,10 @@ int main(){
               cout << "Value found" << '\n';
             }
           }
+      } else if (operation == 4) {
+         cout << "height of tree:" << '\n';
+         height(root);
       }
-    } while(operation!=4);
+    } while(operation!=5);
     return 0;
 }

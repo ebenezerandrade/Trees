@@ -1,2 +1,1 @@
-# Trees
-Several models of trees
+# Data Structures and Algorithms
